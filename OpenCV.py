@@ -6,20 +6,21 @@ import numpy as np
 from PIL import ImageGrab
 import pyautogui
 
-
+import os
+print os.getcwd()
+script_dir = os.getcwd() #<-- absolute dir the script is in
 
 imgbuttons = {
-'actionBar':'/Users/sandrapapo/Desktop/openCVtest/pics/buttons/actionbar.png',
-'fold': '/Users/sandrapapo/Desktop/openCVtest/pics/buttons/fold.png',
-'check':'/Users/sandrapapo/Desktop/openCVtest/pics/buttons/check.png',
-'max': '/Users/sandrapapo/Desktop/openCVtest/pics/buttons/max.png',
-'bet':'/Users/sandrapapo/Desktop/openCVtest/pics/buttons/bet.png',
-'call':'/Users/sandrapapo/Desktop/openCVtest/pics/buttons/call.png', 
-'imBack':'/Users/sandrapapo/Desktop/openCVtest/pics/buttons/imBack.png', 
-'cardsDealt':'/Users/sandrapapo/Desktop/openCVtest/pics/buttons/cardsDelt.png', 
-'raiseTo': '/Users/sandrapapo/Desktop/openCVtest/pics/buttons/raiseTo.png'
+'actionBar':script_dir + '/pics/buttons/actionbar.png',
+'fold': script_dir + '/pics/buttons/fold.png',
+'check':script_dir + '/pics/buttons/check.png',
+'max': script_dir + '/pics/buttons/max.png',
+'bet':script_dir + '/pics/buttons/bet.png',
+'call':script_dir + '/pics/buttons/call.png', 
+'imBack':script_dir + '/pics/buttons/imBack.png', 
+'cardsDealt':script_dir + '/pics/buttons/cardsDelt.png', 
+'raiseTo': script_dir + '/pics/buttons/raiseTo.png'
 }
-
 
 #to make quicker we can reduce the quality of the image and/or
 #all that matters is that the images are the same resolution
@@ -49,11 +50,11 @@ def screenCapture():
 
 def getImportantRanks(currentScreen):    
     imgRanks = {
-    '/Users/sandrapapo/Desktop/openCVtest/pics/cards/ten.png':'ten',
-    '/Users/sandrapapo/Desktop/openCVtest/pics/cards/jack.png':'jack',
-    '/Users/sandrapapo/Desktop/openCVtest/pics/cards/queen.png':'queen',
-    '/Users/sandrapapo/Desktop/openCVtest/pics/cards/king.png': 'king',
-    '/Users/sandrapapo/Desktop/openCVtest/pics/cards/ace.png':'ace'
+    script_dir + '/pics/cards/ten.png':'ten',
+    script_dir + '/pics/cards/jack.png':'jack',
+    script_dir + '/pics/cards/queen.png':'queen',
+    script_dir + '/pics/cards/king.png': 'king',
+    script_dir + '/pics/cards/ace.png':'ace'
     }
     sensitivities = [0.95,0.95,0.95,0.95,0.95]
     i = 0
@@ -74,10 +75,10 @@ def getImportantRanks(currentScreen):
 
 def getSuits(currentScreen):
     imgSuits = {
-    '/Users/sandrapapo/Desktop/openCVtest/pics/cards/hearts.png': 'hearts',
-    '/Users/sandrapapo/Desktop/openCVtest/pics/cards/diamonds.png': 'diamonds',
-    '/Users/sandrapapo/Desktop/openCVtest/pics/cards/spades.png':'spades', 
-    '/Users/sandrapapo/Desktop/openCVtest/pics/cards/clubs.png':'clubs'
+    script_dir + '/pics/cards/hearts.png': 'hearts',
+    script_dir + '/pics/cards/diamonds.png': 'diamonds',
+    script_dir + '/pics/cards/spades.png':'spades', 
+    script_dir + '/pics/cards/clubs.png':'clubs'
     }
     sensitivities = [0.96,0.95,0.95,0.95]
     i = 0
@@ -106,7 +107,7 @@ def exists(image, currentScreen, sensitivity):
 
 def waitfor(image,sensitivity):
     while 1:
-        currentScreen = screenCapture() 
+        currentScreen = screenCapture()
         locMatches = findImg(currentScreen, image, sensitivity, 0)
         numMatches = len(locMatches[0])
         if numMatches != 0:
@@ -185,7 +186,7 @@ def filter(location_of_results):
 
 #for i in range(0,1):
 while 1:
-    currentScreen = screenCapture() 
+    currentScreen = screenCapture()
     waitfor(imgbuttons['actionBar'], 0.70)
     play = getPlay(currentScreen)
     print(play)
@@ -215,9 +216,9 @@ print(getSuits(currentScreen))
 '''
 random shit
 print(len(findImg(screenCapture(), template, 0.965, 1)))
-findImg(screenCapture(), '/Users/sandrapapo/Desktop/openCVtest/cards/ten.png', 0.965, 1)
-findImg(screenCapture(), '/Users/sandrapapo/Desktop/openCVtest/cards/jack.png', 0.8, 1)
-imgSuits = {'/Users/sandrapapo/Desktop/openCVtest/cards/heart.png': 'hearts','/Users/sandrapapo/Desktop/openCVtest/cards/diamonds.png': 'diamonds','/Users/sandrapapo/Desktop/openCVtest/cards/spades.png':'spades','/Users/sandrapapo/Desktop/openCVtest/cards/clubs.png':'clubs'}
+findImg(screenCapture(), script_dir + '/cards/ten.png', 0.965, 1)
+findImg(screenCapture(), script_dir + '/cards/jack.png', 0.8, 1)
+imgSuits = {script_dir + '/cards/heart.png': 'hearts',script_dir + '/cards/diamonds.png': 'diamonds',script_dir + '/cards/spades.png':'spades',script_dir + '/cards/clubs.png':'clubs'}
 '''
 
 
